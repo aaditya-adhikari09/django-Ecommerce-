@@ -8,6 +8,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from . import views
 def cart(request,total = 0,quantity = 0, cart_item = None):
     try :
+        tax = 0
+        grand_total = 0
         cart = Cart.objects.get(cart_id = _cart_id(request))
         cart_items = Cartitem.objects.filter(cart = cart, is_active =True)
         for cart_item in cart_items:
@@ -71,9 +73,11 @@ def remove_cart(request,product_id):
         cart_item.delete()
     return redirect('cart')
 
-def remove_cart_item(request,product_id):
-    cart = Cart.objects.get(cart_id =_cart_id(request))
-    product = get_object_or_404(Product,id = product_id)
-    cart_item = Cartitem.objects.get(product = product, cart = cart)
-    cart_item.delete()
-    return redirect('cart')
+# def remove_cart_item(request,product_id):
+#     cart = Cart.objects.get(cart_id =_cart_id(request))
+#     product = get_object_or_404(Product,id = product_id)
+#     cart_item = Cartitem.objects.get(product = product, cart = cart)
+#     cart_item.delete()
+#     return redirect('cart')
+def continueshopping(request):
+    return render(request,'store.html')

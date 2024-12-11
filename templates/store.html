@@ -47,6 +47,7 @@
                 </header>
 
                 <div class="row">
+                    
                     {% for product in products %}
                     <div class="col-md-4">
                         <figure class="card card-product-grid">
@@ -60,7 +61,7 @@
                                         <span class="price">$ {{ product.price }}</span>
                                     </div>
                                 </div>
-                                <a href="#" class="btn btn-block btn-primary">Add to cart</a>
+                                <a href="{% url 'add_cart' product.id %}" class="btn btn-block btn-primary">Add to cart</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -68,6 +69,14 @@
                 </div>
             </main>
         </div>
+    <nav class ="mt-4" aria-label="page navigation sample">
+        {%if  products.has_other_pages %}
+    <ul class ='pagination'>
+        <li class ='page_item disabled'><a class ='page-link' href ='#'>Previous</a></li>
+        <li class = 'page-item active'><a class ='page-link' href ='#'>1</a></li>
+        
+    </ul>
+    {% endif %}
     </div>
 </section>
 
