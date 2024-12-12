@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from .forms import Registrationform
 
 # Create your views here.
 def register(request):
-    return render(request ,'register.html')
+    form = Registrationform()
+    context = {
+        'form' : form,
+    }
+    return render(request ,'register.html', context)
 
 def signup(request):
     return render(request ,'signup.html')
