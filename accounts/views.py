@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .forms import RegistrationForm
 from accounts.models import Account
 from django.contrib import messages ,auth
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def register(request):
@@ -30,8 +31,11 @@ def register(request):
 def signup(request):
     return render(request ,'signup.html')
 
+@login_required(login_url ='login')
 def logout(request):
-    return render(request,'signin.html')
+    auth.logout(request)
+    messages.success(request , 'you are logged out')
+    return redirect('login')
 
 def account(request):
     return HttpResponse('account')
